@@ -67,7 +67,6 @@ const ProjectCard = ({
         </div>
 
         <div className="w-11 h-11 rounded-lg grid place-items-center bg-sky-400 text-zinc-950 shrink-0">
-          <Image src="/images/github-black.png" width={24} height={24} alt="github" /> 
           {/* <span className="material-symbols-rounded" aria-hidden="true">
             arrow_downward
           </span> */}

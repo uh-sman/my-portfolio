@@ -83,9 +83,9 @@ const skillItem = [
     desc: "Real-time Database",
   },
   {
-    imgSrc: "/images/github.png",
-    label: "Github",
-    desc: "Version Control",
+    imgSrc: "/images/firebase.png",
+    label: "",
+    desc: "Real-time Database",
   },
 ];
 const Skill = () => {
