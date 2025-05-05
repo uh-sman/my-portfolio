@@ -77,6 +77,7 @@ const Navbar = ({ navOpen }: { navOpen: boolean }) => {
   return (
     <nav className={`navbar ${navOpen ? "active" : ""}`}>
       {navItems.map(({ label, link, className, ref }, key) => {
+        const itemRef = useRef<HTMLDivElement | null>(null); // Create a separate ref for the div
         return (
           <a
             href={link}
