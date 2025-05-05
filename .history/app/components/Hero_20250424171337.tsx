@@ -1,0 +1,49 @@
+import Image from "next/image";
+import React from "react";
+
+const Hero = () => {
+  return (
+    <section id="home" className="pt-28 lg:pt-36">
+      <div className="container lg:grid lg:grid-cols-[1fr,1fr] lg:gap-8 max-w-2xl mx-auto px-4 md:px-6">
+        <div>
+          <div className="">
+            <figure>
+              <Image
+                src="/images/avatar-1.jpg"
+                alt="my-image"
+                width={40}
+                height={40}
+                className="image-cover"
+              />
+            </figure>
+            <div className="">
+              <span className="">
+                <span className=""></span>
+              </span>
+              Available for work
+            </div>
+          </div>
+
+          <h2 className="">Building scalable Modern Website for the Future</h2>
+          <div className="">
+            ButtonPrimary
+
+            ButtonOutline
+          </div>
+        </div>
+
+        <div className="">
+            <figure className="">
+              <Image src="/images/hero-banner.png"
+              alt="my-image"
+                width={656}
+                height={500}
+              />
+            </figure>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Hero;

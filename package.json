@@ -9,9 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "@types/prop-types": "^15.7.14",
+    "add": "^2.0.6",
+    "gsap": "^3.12.7",
+    "lenis": "^1.3.1",
     "next": "15.1.0",
+    "prop-types": "^15.8.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-tooltip": "latest",
+    "tailwind-scrollbar": "^4.0.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
