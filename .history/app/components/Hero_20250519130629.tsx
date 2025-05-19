@@ -41,13 +41,12 @@ const Hero = () => {
         <div className="hidden lg:block">
           <figure className="w-full max-w-[480px] ml-auto bg-gradient-to from-sky-400 via-sky-400 to-65% rounded-[60px] overflow-hidden bg-transparent">
             <Image
-              src="/images/my-photo.png"
+              src="/images/.jpg"
               // src="/images/hero-banner.png"
               alt="my-image"
               width={656}
               height={500}
               priority
-              quality={100}
               className=" bg-transparent bg-"
             />
           </figure>

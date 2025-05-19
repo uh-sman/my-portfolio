@@ -47,7 +47,7 @@ const Hero = () => {
               width={656}
               height={500}
               priority
-              quality={100}
+              quality={1}
               className=" bg-transparent bg-"
             />
           </figure>
