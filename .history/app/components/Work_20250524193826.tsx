@@ -38,9 +38,9 @@ const works = [
     liveLink: "https://pixstock-official.vercel.app/",
   },
   {
-    imgSrc: "/images/voice-ai-agent.png",
-    title: "Voice AI Agent",
-    tags: ["AI", "LLM"],
+    imgSrc: "/images/project-2.jpg",
+    title: "Free stock photo app",
+    tags: ["API", "SPA"],
     projectLink: "https://github.com/uh-sman/ai-voice-app",
     liveLink: "https://ai-voice-app-tau.vercel.app/",
   },
