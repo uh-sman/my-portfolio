@@ -44,13 +44,6 @@ const works = [
     projectLink: "https://github.com/uh-sman/ai-voice-app",
     liveLink: "https://ai-voice-app-tau.vercel.app/",
   },
-  {
-    imgSrc: "/images/converso_image.png",
-    title: "Converso Personal Educator",
-    tags: ["AI", "LLM", "NEXTJS", "CLERK", "SUPABASE"],
-    projectLink: "https://github.com/uh-sman/Converso-Saas-App",
-    liveLink:"https://converso-saas-app-9r2p-lwvftasx5-uhsmans-projects.vercel.app/",
-  },
 ];
 const Work = () => {
   return (

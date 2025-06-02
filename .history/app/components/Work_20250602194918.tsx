@@ -46,10 +46,10 @@ const works = [
   },
   {
     imgSrc: "/images/converso_image.png",
-    title: "Converso Personal Educator",
+    title: "Converso Personal Assistant",
     tags: ["AI", "LLM", "NEXTJS", "CLERK", "SUPABASE"],
-    projectLink: "https://github.com/uh-sman/Converso-Saas-App",
-    liveLink:"https://converso-saas-app-9r2p-lwvftasx5-uhsmans-projects.vercel.app/",
+    projectLink: "https://github.com/uh-sman/ai-voice-app",
+    liveLink: "https://ai-voice-app-tau.vercel.app/",
   },
 ];
 const Work = () => {
