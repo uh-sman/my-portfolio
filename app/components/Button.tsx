@@ -1,86 +1,51 @@
 import React from "react";
+import Magnetic from "./Magnetic";
 
-interface ButtonPrimaryProps {
+interface ButtonProps {
+  label: string;
   href?: string;
   target?: string;
-  label: string;
-  icon: string;
+  icon?: React.ReactNode;
+  variant?: "primary" | "ghost";
+  type?: "button" | "submit";
   classes?: string;
 }
-interface ButtonOutlineProps {
-  href: string;
-  target?: string;
-  label: string;
-  icon: string;
-  classes?: string;
-}
-const ButtonPrimary = ({
+
+const Button = ({
+  label,
   href,
   target,
-  label,
   icon,
-  classes,
-}: ButtonPrimaryProps) => {
-  if (!href) {
-    return (
-      <button className={`btn btn-primary ${classes}`}>
-        {label}
-        {icon ? (
-          <span className="material-symbols-rounded" aria-hidden="true">
-            {icon}
-          </span>
-        ) : null}
-      </button>
-    );
-  }
+  variant = "primary",
+  type = "button",
+  classes = "",
+}: ButtonProps) => {
+  const className = `btn btn-${variant} ${classes}`;
+  const content = (
+    <>
+      <span>{label}</span>
+      {icon && <span className="btn-icon">{icon}</span>}
+    </>
+  );
+
   return (
-    <a href={href} target={target} className={`btn btn-primary ${classes}`}>
-      {label}
-      {icon ? (
-        <span className="material-symbols-rounded" aria-hidden="true">
-          {icon}
-        </span>
-      ) : null}
-    </a>
+    <Magnetic strength={0.25}>
+      {href ? (
+        <a
+          href={href}
+          target={target}
+          rel={target === "_blank" ? "noopener noreferrer" : undefined}
+          className={className}
+        >
+          {content}
+        </a>
+      ) : (
+        <button type={type} className={className}>
+          {content}
+        </button>
+      )}
+    </Magnetic>
   );
 };
 
-
-
-
- const ButtonOutline = ({
-  href,
-  target,
-  label,
-  icon,
-  classes,
-}: ButtonOutlineProps) => {
-  if (!href) {
-    return (
-      <button className={`btn btn-outline ${classes}`}>
-        {label}
-        {icon ? (
-          <span className="material-symbols-rounded" aria-hidden="true">
-            {icon}
-          </span>
-        ) : null}
-      </button>
-    );
-  }
-  return (
-    <a href={href} target={target} className={`btn btn-outline ${classes}`}>
-      {label}
-      {icon ? (
-        <span className="material-symbols-rounded" aria-hidden="true">
-          {icon}
-        </span>
-      ) : null}
-    </a>
-  );
-};
-
-
-export {
-  ButtonPrimary,
-  ButtonOutline,
-}
+export default Button;

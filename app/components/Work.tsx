@@ -1,74 +1,22 @@
 import React from "react";
 import ProjectCard from "./ProjectCard";
+import SectionHeading from "./SectionHeading";
+import { works } from "../data";
 
-const works = [
-  {
-    imgSrc: "/images/tesla-clone-img.png",
-    title: "Tesla Clone",
-    tags: ["Responsive Design", "Clone"],
-    projectLink: "https://github.com/uh-sman/Tesla-clone-App.git",
-    liveLink: "https://incandescent-piroshki-0d87d0.netlify.app/#",
-  },
-  {
-    imgSrc: "/images/carepulse-image.png",
-    title: "CarePulse",
-    tags: ["Healthcare", "Fullstack", "Appwrite"],
-    projectLink: "https://github.com/uh-sman/carepulse",
-    liveLink: "https://carepulse-ten-gules.vercel.app/",
-  },
-  {
-    imgSrc: "/images/youtubeclone-image.png",
-    title: "Youtube Clone",
-    tags: ["Entertainment", "Development", "Clone"],
-    projectLink: "https://github.com/uh-sman/YoutubeClone",
-    liveLink: "https://youtube-clone-u.netlify.app/",
-  },
-  {
-    imgSrc: "/images/project-1.jpg",
-    title: "Full stack music app",
-    tags: ["API", "MVC", "Development"],
-    projectLink: "https://musify-5al0.onrender.com/",
-    liveLink: "https://musify-5al0.onrender.com/",
-  },
-  {
-    imgSrc: "/images/project-2.jpg",
-    title: "Free stock photo app",
-    tags: ["API", "SPA"],
-    projectLink: "https://pixstock-official.vercel.app/",
-    liveLink: "https://pixstock-official.vercel.app/",
-  },
-  {
-    imgSrc: "/images/voice-ai-agent.png",
-    title: "Voice AI Agent",   
-    tags: ["AI", "LLM"],
-    projectLink: "https://github.com/uh-sman/ai-voice-app",
-    liveLink: "https://ai-voice-app-tau.vercel.app/",
-  },
-  {
-    imgSrc: "/images/converso_image.png",
-    title: "Converso Personal Educator",
-    tags: ["AI", "LLM", "NEXTJS", "CLERK", "SUPABASE"],
-    projectLink: "https://github.com/uh-sman/Converso-Saas-App",
-    liveLink: "https://converso-saas-app-9r2p.vercel.app/",
-  },
-];
 const Work = () => {
   return (
     <section id="work" className="section">
       <div className="container">
-        <h2 className="headline-2 mb-8 reveal-up">My portfolio highlights</h2>
+        <SectionHeading
+          index="04"
+          label="Selected work"
+          title="Projects I'm *proud* of"
+          desc="A selection of products I've designed and engineered — from AI-powered platforms to full-stack apps and polished interfaces."
+        />
 
-        <div className="grid gap-x-4 gap-y-5 grid-cols-[repeat(auto-fill,_minmax(280px,_1fr))]">
-          {works.map(({ imgSrc, title, tags, projectLink, liveLink }, key) => (
-            <ProjectCard
-              key={key}
-              imgSrc={imgSrc}
-              title={title}
-              tags={tags}
-              projectLink={projectLink}
-              liveLink={liveLink}
-              classes="reveal-up"
-            />
+        <div className="reveal-stagger grid gap-4 md:grid-cols-2 lg:gap-6">
+          {works.map((work, i) => (
+            <ProjectCard key={work.title} index={i} featured={i === 0} {...work} />
           ))}
         </div>
       </div>

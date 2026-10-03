@@ -1,97 +1,48 @@
 "use client";
-import React, { useRef, useEffect } from "react";
-import PropTypes from "prop-types";
-import Link from "next/link";
+import React, { useEffect, useRef } from "react";
+import { navItems } from "../data";
 
-const Navbar = ({ navOpen }: { navOpen: boolean }) => {
-  const lastActiveLink = useRef<HTMLAnchorElement | null>(null);
-  const activeBox = useRef<HTMLDivElement | null>(null);
-
-  const initActiveBox = () => {
-    if (activeBox.current && lastActiveLink.current) {
-      activeBox.current.style.top = lastActiveLink.current.offsetTop + "px";
-      activeBox.current.style.left = lastActiveLink.current.offsetLeft + "px";
-      activeBox.current.style.width = lastActiveLink.current.offsetWidth + "px";
-      activeBox.current.style.top = lastActiveLink.current.offsetTop + "px";
-      activeBox.current.style.height =
-        lastActiveLink.current.offsetHeight + "px";
-    }
-  };
+// Desktop pill nav with a sliding indicator that follows the active section.
+const Navbar = ({ active }: { active: string }) => {
+  const nav = useRef<HTMLElement>(null);
+  const indicator = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    // Initialize active box on mount
-    initActiveBox();
-
-    // Add event listener for window resize on mount
-    window.addEventListener("resize", initActiveBox);
-
-    // Cleanup the event listener on unmount
-    return () => {
-      window.removeEventListener("resize", initActiveBox);
+    const place = () => {
+      const link = nav.current?.querySelector<HTMLAnchorElement>(`a[href="${active}"]`);
+      if (!link || !indicator.current) return;
+      indicator.current.style.width = `${link.offsetWidth}px`;
+      indicator.current.style.transform = `translateX(${link.offsetLeft}px)`;
+      indicator.current.style.opacity = "1";
     };
-  }, []); // Empty dependency array means this runs only once, when the component mounts
-
-  const activeCurrentLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!activeBox.current || !lastActiveLink.current) return; // Early return if refs are null
-
-    lastActiveLink?.current?.classList.remove("active");
-    e.currentTarget.classList.add("active");
-
-    lastActiveLink.current = e.currentTarget;
-    activeBox.current.style.top = lastActiveLink.current.offsetTop + "px";
-    activeBox.current.style.left = lastActiveLink.current.offsetLeft + "px";
-    activeBox.current.style.width = lastActiveLink.current.offsetWidth + "px";
-    activeBox.current.style.top = lastActiveLink.current.offsetTop + "px";
-    activeBox.current.style.height = lastActiveLink.current.offsetHeight + "px";
-  };
-
-  const navItems = [
-    {
-      label: "Home",
-      link: "#home",
-      className: "nav-link active",
-      ref: lastActiveLink,
-    },
-    {
-      label: "About",
-      link: "#about",
-      className: "nav-link",
-    },
-    {
-      label: "Work",
-      link: "#work",
-      className: "nav-link",
-    },
-    {
-      label: "Reviews",
-      link: "#reviews",
-      className: "nav-link",
-    },
-    {
-      label: "Contact",
-      link: "#contact",
-      className: "nav-link md:hidden",
-    },
-  ];
+    place();
+    window.addEventListener("resize", place);
+    return () => window.removeEventListener("resize", place);
+  }, [active]);
 
   return (
-    <nav className={`navbar ${navOpen ? "active" : ""}`}>
-      {navItems.map(({ label, link, className, ref }, key) => {
-        return (
-          <a
-            href={link}
-            key={key}
-            ref={ref}
-            className={className}
-            onClick={activeCurrentLink}
-          >
-            {label}
-            {/* <div ref={itemRef} className="item-box"></div>{" "} */}
-            {/* Separate ref for the div */}
-          </a>
-        );
-      })}
-      <div className="active-box" ref={activeBox}></div>
+    <nav
+      ref={nav}
+      className="glass relative isolate hidden items-center rounded-full p-1 md:flex"
+      aria-label="Primary"
+    >
+      <span
+        ref={indicator}
+        className="absolute left-0 top-1 -z-10 h-[calc(100%-0.5rem)] rounded-full bg-zinc-50 opacity-0 transition-[transform,width,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+        aria-hidden="true"
+      />
+      {navItems.map(({ label, href }) => (
+        <a
+          key={href}
+          href={href}
+          className={`rounded-full px-4 py-2 text-sm font-medium transition-colors duration-300 ${
+            active === href ? "text-ink-950" : "text-zinc-400 hover:text-zinc-50"
+          }`}
+          aria-current={active === href ? "true" : undefined}
+        >
+          {label}
+        </a>
+      ))}
     </nav>
   );
 };

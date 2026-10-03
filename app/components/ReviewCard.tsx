@@ -1,54 +1,42 @@
 import Image from "next/image";
 import React from "react";
+import { Quote, Star } from "./Icons";
 
 interface ReviewCardProps {
   content: string;
   company: string;
   imgSrc: string;
   name: string;
-  classes?: string;
 }
 
-const ratings = new Array(5);
-
-ratings.fill({
-  icon: "star",
-  style: { fontVariationSettings: "'FILL' 1" },
-});
 const ReviewCard = ({ content, name, imgSrc, company }: ReviewCardProps) => {
   return (
-    <div className="bg-zinc-800 p-5 rounded-xl min-w-[320px] flex flex-col lg:min-w-[420px]">
-      <div className="flex items-center gap-1 mb-3">
-        {ratings.map(({ icon, style }, key) => (
-          <span key={key} className="material-symbols-rounded text-yellow-300 text-[18px]" style={style}>
-            {icon}
-          </span>
-        ))}
-      </div>
-
-      <p className="text-zinc-400 mb-8">{content}</p>
-
-      <div className="flex items-center gap-2 mt-auto">
-        <figure className="img-box rounded-lg">
-          <Image
-            src={imgSrc}
-            alt={name}
-            width={44}
-            height={44}
-            loading="lazy"
-            className="img-cover"
-          />
-        </figure>
-
-        <div className="">
-          <p className="">{name}</p>
-
-          <p className="text-xs text-zinc-400 tracking-wider">
-            {company}
-          </p>
+    <figure className="card spotlight flex w-[320px] shrink-0 flex-col p-6 md:w-[420px] md:p-8">
+      <div className="mb-6 flex items-center justify-between">
+        <div className="flex gap-1 text-amber-300" aria-label="5 out of 5 stars">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star key={i} width={16} height={16} />
+          ))}
         </div>
+        <Quote width={28} height={28} className="text-white/10" />
       </div>
-    </div>
+
+      <blockquote className="mb-8 text-zinc-300 md:text-lg md:leading-relaxed">“{content}”</blockquote>
+
+      <figcaption className="mt-auto flex items-center gap-3">
+        <Image
+          src={imgSrc}
+          alt=""
+          width={44}
+          height={44}
+          className="h-11 w-11 rounded-full object-cover ring-2 ring-white/10"
+        />
+        <div>
+          <p className="font-medium text-zinc-100">{name}</p>
+          <p className="text-sm text-zinc-500">{company}</p>
+        </div>
+      </figcaption>
+    </figure>
   );
 };
 

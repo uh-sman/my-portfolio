@@ -1,93 +1,45 @@
-import React from 'react'
-import ReviewCard from './ReviewCard';
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
+import React from "react";
+import ReviewCard from "./ReviewCard";
+import SectionHeading from "./SectionHeading";
+import { reviews } from "../data";
 
+const half = Math.ceil(reviews.length / 2);
+const rows = [reviews.slice(0, half), reviews.slice(half)];
 
-const reviews = [
-  {
-    content:
-    "Exceptional web development! Delivered a seamless, responsive site with clean code and great UX.",
-    name: "Sophia Ramirez",
-    imgSrc: "/images/people-1.jpg",
-    company: "PixelForge",
-  },
-  {
-    content:
-    "Impressive work! Fast loading times, intuitive design, and flawless backend integration. Highly recommend.",
-    name: "Ethan Caldwell",
-    imgSrc: "/images/people-2.jpg",
-    company: "NexaWave",
-  },
-  {
-    content:
-    "Outstanding developer! Built a robust site with perfect functionality. Efficient and detail-oriented.",
-    name: "Liam Bennett",
-    imgSrc: "/images/people-3.jpg",
-    company: "CodeCraft",
-  },
-  {
-    content:
-    "Creative and skilled! Produced a modern, user-friendly site that exceeded expectations. Great communication.",
-    name: "Noah Williams",
-    imgSrc: "/images/people-4.jpg",
-    company: "BrightWeb",
-  },
-  {
-    content:
-      "Professional work! Delivered on time, with a polished design and smooth user experience. Top-notch developer.",
-      name: "Ava Thompson",
-      imgSrc: "/images/people-5.jpg",
-      company: "TechMosaic",
-    },
-    {
-    content:
-      "Excellent project execution! High-quality code, responsive design, and exceptional problem-solving skills.",
-    name: "Jonathan",
-    imgSrc: "/images/people-6.jpg",
-    company: "Skyline Digital",
-  },
-];
-gsap.registerPlugin(useGSAP,ScrollTrigger);
 const Review = () => {
-  useGSAP(() => {
-    gsap.to('.scrub-slide', {
-      scrollTrigger: {
-        trigger: '.scrub-slide',
-        start: "top 80%",
-        end: "bottom 20%",
-        scrub: true,
-      },
-      x: '-1000',
-      // opacity: 0,
-      duration: 1,
-      ease: "power2.out",
-    })
-  })
   return (
-    <section id='reviews' className="section overflow-hidden">
+    <section id="reviews" className="section overflow-hidden">
       <div className="container">
-        <h2 className="headline-2 mb-8">
-            What my clients say about me
-        </h2>
+        <SectionHeading
+          index="05"
+          label="Testimonials"
+          title="Kind words from *clients*"
+          align="center"
+        />
+      </div>
 
-        <div className="scrub-slide flex items-stretch gap-3 w-fit">
-            {
-                reviews.map(({ content, name, imgSrc, company},key) => (
-                    <ReviewCard 
-                    key={key}
-                    name={name}
-                    imgSrc={imgSrc}
-                    company={company}
-                    content={content}
-                    />
-                ))
-            }
-        </div>
+      <div className="reveal marquee-mask marquee-pause flex flex-col gap-4">
+        {rows.map((row, r) => {
+          // Repeat enough cards to fill wide screens, then duplicate for a seamless loop.
+          const filled = [...row, ...row];
+          return (
+            <div
+              key={r}
+              className={`flex w-max gap-4 [--marquee-duration:60s] ${
+                r === 0 ? "animate-marquee" : "animate-marquee-reverse"
+              }`}
+            >
+              {[...filled, ...filled].map((review, i) => (
+                <div key={i} aria-hidden={i >= row.length ? true : undefined}>
+                  <ReviewCard {...review} />
+                </div>
+              ))}
+            </div>
+          );
+        })}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Review
+export default Review;

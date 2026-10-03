@@ -1,12 +1,8 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import "lenis/dist/lenis.css";
-import "react-tooltip/dist/react-tooltip.css";
-import { Tooltip } from "react-tooltip";
-import { Tooltip as ReactTooltip } from "react-tooltip";
-import { gsap } from "gsap";
-import { ReactLenis, useLenis } from "lenis/react";
+import SmoothScroll from "./components/SmoothScroll";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,9 +14,21 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+});
+
 export const metadata: Metadata = {
-  title: "Usman Umar | Portfolio",
-  description: "Usman Portfolio",
+  title: "Usman Umar — Full-Stack Software Engineer",
+  description:
+    "Usman Umar is a full-stack software engineer building production web apps, SaaS products and end-to-end AI features with Next.js, TypeScript and Python. Open to remote roles.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#050507",
 };
 
 export default function RootLayout({
@@ -31,20 +39,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="scrollbar-thin scrollbar-track-zinc-800 scrollbar-thumb-zinc-500"
+      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} scrollbar-thin scrollbar-track-ink-950 scrollbar-thumb-zinc-700`}
     >
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0..1,0"
-        />
-      </head>
-      <ReactLenis root>
-      <body
-      >
-        {children}
+      <body>
+        <SmoothScroll>{children}</SmoothScroll>
+        <div className="grain" aria-hidden="true" />
       </body>
-      </ReactLenis>
     </html>
   );
 }

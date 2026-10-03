@@ -1,28 +1,24 @@
-import Image from 'next/image';
-import React from 'react'
-
+import Image from "next/image";
+import React from "react";
 
 interface SkillCardProps {
-    imagSrc: string;
-    label: string;
-    desc: string;
-    classes?: string;
+  imgSrc: string;
+  label: string;
+  desc: string;
 }
-const SkillCard = ({ imagSrc, label, desc, classes }: SkillCardProps) => {
-  return (
-    <div className={`flex items-center gap-3 ring-2 ring-inset ring-50;0 rounded-2xl p-3 hover:bg-zinc-800 transition-colors group ${classes}`}>
-      <figure className="bg-zinc-700/50 rounded-lg overflow-hidden w-12 h-12 p-2 group-hover:bg-zinc-900 transition-colors ">
-        <Image src={imagSrc} alt={label} width={32} height={32}/>
-      </figure>
-      <div className="">
-        <h3>{label}</h3>
 
-        <p className="text-zinc-400 text-sm">
-            {desc}
-        </p>
+const SkillCard = ({ imgSrc, label, desc }: SkillCardProps) => {
+  return (
+    <div className="card spotlight group flex items-center gap-4 rounded-2xl p-4 transition-colors duration-500 hover:bg-ink-700/80">
+      <figure className="grid h-14 w-14 shrink-0 place-items-center rounded-xl border border-white/[0.06] bg-white/[0.04] p-3 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-rotate-6 group-hover:scale-110">
+        <Image src={imgSrc} alt="" width={32} height={32} className="h-8 w-8 object-contain" />
+      </figure>
+      <div>
+        <h3 className="font-medium text-zinc-100">{label}</h3>
+        <p className="text-sm text-zinc-500">{desc}</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SkillCard
+export default SkillCard;
